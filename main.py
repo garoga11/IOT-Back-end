@@ -15,28 +15,13 @@ def get():
     user_id = str(request.args.get("user_id"))
     money = int(request.args.get("money"))
     token = request.args.get("abc")
-    
-    # print(token+" ARDUINO")
-    # hola = "hola"
-    # hola = blake2b(digest_size=10).hexdigest()
-    # print(hola)
 
     key = f"Hi9@yBl4$j8WM91*4Wf8{user_id}{money}"
-    # key_hash= hashlib.sha256(str(key).encode('utf-8'))
-    # key_str= str(key_hash)
- 
     key_str= str(key)
-
     key_str = blake2b(digest_size=64).hexdigest()
-    # token = blake2b(digest_size=64).hexdigest()
-
-    print(key_str)
-    print(token)
-    # key_h="hola"
 
     if token == key_str:
         _request= database.db.passenger_transactions.find_one({"_id":user_id})
-
         if _request:
             
             current_balance = _request["current_balance"]
