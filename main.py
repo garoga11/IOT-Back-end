@@ -17,8 +17,8 @@ def get():
     token = request.args.get("abc")
 
     key = f"Hi9@yBl4$j8WM91*4Wf8{user_id}{money}"
-    key_str= str(key)
-    key_str = blake2b(digest_size=64).hexdigest()
+    key_ard = hashlib.blake2b(key.encode())
+    key_str = key_ard.hexdigest()
 
     if token == key_str:
         _request= database.db.passenger_transactions.find_one({"_id":user_id})
