@@ -46,15 +46,15 @@ def get():
                 }})
 
                 if balance_update:
-                    return jsonify({"message":"successful transaction"})
+                    return jsonify({"message":"Something went wrong, try again"})
                 else:
-                    return jsonify({"message":"Balance could't be updated"})
+                    return jsonify({"message":"Something went wrong, try again"})
             else: 
-                return jsonify({"message":"Unsuccessful transaction"})
+                return jsonify({"message":"Something went wrong, try again"})
         else:
-            return jsonify({"message":"Invalid userId"})
+            return jsonify({"message":"Something went wrong, try again"})
     else:
-        return jsonify({"message":"Invalid token"})
+        return jsonify({"message":"Something went wrong, try again"})
 
 
 if __name__ == '__main__':
