@@ -1,4 +1,5 @@
-from flask import Flask, json, jsonify, request
+from flask import Flask, jsonify, request
+from flask.wrappers import Response
 from flask_restful import Api, Resource, abort
 from flask_cors import CORS
 import db_config as database
@@ -19,6 +20,7 @@ def get():
     key = f"Hi9@yBl4$j8WM91*4Wf8{user_id}{money}"
     key_ard = hashlib.blake2b(key.encode())
     key_str = key_ard.hexdigest()
+
 
     if token == key_str:
         _request= database.db.passenger_transactions.find_one({"_id":user_id})
@@ -56,6 +58,15 @@ def get():
     else:
         return jsonify({"message":"Something went wrong, try again"})
 
+
+@app.route('/getUser/', methods=['GET'])
+def getUser():
+
+    user_id = str(request.args.get("user_id"))
+    _request= database.db.passenger_transactions.find_one({"_id":user_id})
+    response = json_util.dumps(_request)
+    return Response(response)
+        
 
 if __name__ == '__main__':
     app.run(debug=True)
