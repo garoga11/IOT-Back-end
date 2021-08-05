@@ -21,8 +21,6 @@ def get():
     key_ard = hashlib.blake2b(key.encode())
     key_str = key_ard.hexdigest()
 
-    print(key_str)
-    print(token)
 
     if token == key_str:
         _request= database.db.passenger_transactions.find_one({"_id":user_id})
